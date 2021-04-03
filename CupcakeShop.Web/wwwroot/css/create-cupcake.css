@@ -1,0 +1,71 @@
+
+input[type="date" i] {
+    align-items: center;
+    display: inline-block;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    cursor: default;
+    overflow: hidden;
+}
+
+.cupcake-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.cupcake-form label {
+    width: 8rem;
+    text-align:left ;
+}
+
+h2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 3vw;
+    font-weight: bold;
+}
+
+
+
+.left {
+    display: table-caption;
+    align-items: center;
+    margin: 1vw;
+    width: 30vw;
+}
+
+.right {
+    display: table-caption;
+    align-items: center;
+    margin: 1vw;
+}
+
+.cupcake-title {
+    font-weight: bold;
+    color: black;
+}
+
+.radio-container {
+    display: flex;
+}
+
+.radio-label {
+    width: 8rem;
+}
+
+.radio-container input {
+    width: unset !important;
+}
+
+.selector {
+    word-wrap: normal;
+    width: 13rem;
+    padding: 1px 2px;
+    height: 2rem;
+}
+
+.cupcake-form input {
+    width: 13rem;
+}

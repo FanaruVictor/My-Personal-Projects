@@ -1,0 +1,99 @@
+@model CupcakeShop.Web.Models.Cupcakes.CupcakeInsertRequest
+
+@{
+    Layout = "_Layout";
+}
+
+<form class="cupcake-form" method="post" asp-action="Create">
+    <div>
+        <h2 class="page-title">Add a Cupcake</h2>
+    </div>
+
+    <div class="form">
+        <div class="left">
+            <label asp-for="Name">Cupcake Name: </label>
+            <input asp-for="Name" type="text"><br><br>
+
+            <label asp-for="Producer">Producer: </label>
+            <select class="selector" asp-for="Producer">
+                <option value="Inan">Inan</option>
+                <option value="Story">Story</option>
+                <option value="Mirabel">Mirabel</option>
+            </select><br><br>
+
+            <label asp-for="Flavour">Flavour: </label>
+            <input asp-for="Flavour" type="text"><br><br>
+
+            <div class="radio-container">
+                <div class="radio-label">Weight:</div>
+                <div class="radio-options">
+                    <input asp-for="Weight" value="Small" type="radio">
+                    <label asp-for="Weight">Small(150g)</label><br>
+
+                    <input asp-for="Weight" value="Medium" type="radio">
+                    <label asp-for="Weight">Medium(300g)</label><br>
+
+                    <input asp-for="Weight" value="Large" type="radio">
+                    <label asp-for="Weight">Large(450)</label><br><br>
+                </div>
+            </div>
+
+            <div class="radio-container">
+                <div class="radio-label">Dough:</div>
+                <div class="radio-options">
+                    <input type="radio" asp-for="Dough" value="WholemealFlour">
+                    <label asp-for="Dough">Wholemeal Flour</label><br>
+
+                    <input type="radio" asp-for="Dough" value="ProteicFlour">
+                    <label asp-for="Dough">Proteic Flour</label><br>
+
+                    <input type="radio" asp-for="Dough" value="NormalFlour">
+                    <label asp-for="Dough">Normal Flour</label><br><br>
+                </div>
+            </div>
+            <label asp-for="Price">Price:</label>
+            <input type="number" min="0.99" asp-for="Price">
+        </div>
+
+        <div class="right">
+            <div class="radio-container">
+                <div class="radio-label">Icing:</div>
+                <div class="radio-options">
+                    <input asp-for="Icing" value="BlackChocolate" type="radio">
+                    <label asp-for="Icing">Black Chocolate</label><br>
+
+                    <input asp-for="Icing" value="MilkChocolate" type="radio">
+                    <label asp-for="Icing">Milk Chocolate</label><br>
+
+                    <input asp-for="Icing" value="WhileChocolate" type="radio">
+                    <label asp-for="Icing">White Chocolate</label><br>
+
+                    <input asp-for="Icing" value="Caramel" type="radio">
+                    <label asp-for="Icing">Caramel</label><br>
+
+                    <input asp-for="Icing" value="BurnSugar" type="radio">
+                    <label asp-for="Icing">Burn Sugar</label><br><br>
+                </div>
+            </div>
+            <label asp-for="Expiration">Expiraton at: </label>
+            <input asp-for="Expiration" type="date"><br><br>
+            <div class="radio-container">
+                <div class="radio-label">Gluten:</div>
+                <div class="radio-options">
+                    <input type="radio" asp-for="Gluten" value="Yes">
+                    <label asp-for="Gluten">Yes</label><br>
+
+                    <input type="radio" asp-for="Gluten" value="No">
+                    <label asp-for="Gluten">No</label><br><br>
+                </div>
+            </div>
+            <label asp-for="Stock">Stock:</label>
+            <input type="number" min="0" asp-for="Stock">
+        </div>
+    </div>
+
+    <div>
+        <input type="submit" value="Create" class="submitCreateButton btn btn-info">
+        <a asp-controller="Cupcake" asp-action="Cupcakes" class="backButton btn btn-danger">Back</a>
+    </div>
+</form>

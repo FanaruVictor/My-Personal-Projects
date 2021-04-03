@@ -1,0 +1,14 @@
+.employee-form label{
+    width: 8rem;
+    text-align: left;
+}
+.employee-form{
+    text-align: center;
+    margin: 2rem 0;
+}
+.employee-form input{
+    width: 13rem;
+}
+.employee-tabel{
+    margin-top: 3rem;
+}

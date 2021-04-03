@@ -1,0 +1,116 @@
+@model CupcakeShop.Web.Models.Order.ConfirmOrderList
+
+@{
+    Layout = "_Layout";
+}
+
+<form class="confirm-order" method="post" asp-action="ConfirmOrder" asp-route-clientId="1">
+    <div>
+        <h2 class="page-title">Confirm Order</h2>
+    </div>
+
+    <div class=" confirmOrder-form">
+        <samp>Persona Data:</samp><br>
+        <label asp-for="@Model.ClientDto.FirstName">First Name: </label>
+        <input asp-for="@Model.ClientDto.LastName" type="text" readonly><br><br>
+
+        <label asp-for="@Model.ClientDto.PhoneNumber">Phone Number: </label>
+        <input asp-for="@Model.ClientDto.PhoneNumber" type="text" readonly><br><br>
+
+        <label asp-for="@Model.ClientDto.Email">Email: </label>
+        <input asp-for="@Model.ClientDto.Email" type="text" readonly><br><br>
+
+        <div class="radio-container">
+            <div class="radio-options">
+                <input asp-for="ClientDto.Type" value="Individual" type="radio">
+                <label asp-for="ClientDto.Type">Individual</label><br>
+
+                <input asp-for="ClientDto.Type" value="Company" type="radio">
+                <label asp-for="ClientDto.Type">Company</label><br>
+            </div>
+        </div><br>
+
+        <samp>Address:</samp><br>
+        <label asp-for="@Model.ClientDto.Street">Street: </label>
+        <input asp-for="@Model.ClientDto.Street" type="text" readonly><br><br>
+
+        <label asp-for="@Model.ClientDto.Block">Block: </label>
+        <input asp-for="@Model.ClientDto.Block" type="number" readonly><br><br>
+
+        <label asp-for="@Model.ClientDto.Floor">Floor: </label>
+        <input asp-for="@Model.ClientDto.Floor" type="number" readonly><br><br>
+
+        <label asp-for="@Model.ClientDto.Suit">Suit: </label>
+        <input asp-for="@Model.ClientDto.Suit" type="number" readonly><br><br>
+
+        <samp>Order Detales:</samp><br>
+        <label asp-for="@Model.OrderDto.DateOrder">Date Order:</label>
+        <input asp-for="@Model.OrderDto.DateOrder" type="datetime" value="@Model.OrderDto.DateOrder"><br><br>
+
+        <label asp-for="@Model.OrderDto.StatusOrder">Status Order:</label>
+        <select class="selector" asp-for="@Model.OrderDto.StatusOrder" readonly>
+            <option value="Confirmed">Confirmed</option>
+            <option value="Canceled">Canceled</option>
+            <option value="OnHold">On Hold</option>
+            <option value="Processing">Processing</option>
+        </select><br><br>
+    </div><br>
+
+    <div>
+        @if (Model.CupcakeDtos.Any())
+        {
+            <samp>Cupcakes:</samp>
+            <br>
+            <table class="cupcakes-table table-bordered table-striped ">
+                <thead>
+                <tr>
+                    <th>
+                        Cupcake Name
+                    </th>
+                    <th>
+                        Flavour
+                    </th>
+                    <th>
+                        Price
+                    </th>
+                    <th>
+                        Weight
+                    </th>
+                    <th>
+                        Producer
+                    </th>
+                    <th>
+                        Expiration
+                    </th>
+                    <th>
+                        Icing
+                    </th>
+                    <th>
+                        Dough
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var cupcake in Model.CupcakeDtos)
+                {
+                    <tr>
+                        <td >@cupcake.Name</td>
+                        <td >@cupcake.Flavour</td>
+                        <td >@cupcake.Price</td>
+                        <td >@cupcake.Weight</td>
+                        <td >@cupcake.Producer</td>
+                        <td >@cupcake.Expiration</td>
+                        <td >@cupcake.Icing</td>
+                        <td >@cupcake.Dough</td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        }
+        <div>
+            <input type="submit" class="submitOrderButton btn btn-primary" value="Confirm Order">
+            <a asp-controller="Order" asp-action="EditOrder" asp-route-clientId="1" class="submitOrderButton btn btn-info">Edit Order</a>
+            <a asp-controller="Cart" asp-action="Cart" asp-route-clientId="1" class="backToCartButton btn btn-danger">Back to Cart</a>
+        </div>
+    </div>
+</form>

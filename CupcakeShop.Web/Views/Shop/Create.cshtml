@@ -1,0 +1,39 @@
+@model CupcakeShop.Web.Models.Shop.ShopInsertRequest
+
+@{
+    Layout = "_Layout";
+}
+
+<div>
+    <div>
+        <h2 class="page-title">Create a shop</h2>
+    </div>
+    <div>
+        <form class="shop-form" method="Post" asp-action="Create">
+            <label asp-for="Country">Country: </label>
+            <input asp-for="Country" type="text"><br><br>
+
+            <label asp-for="City">City: </label>
+            <input asp-for="City" type="text"><br><br>
+
+            <label asp-for="Street">Street: </label>
+            <input asp-for="Street" type="text"><br><br>
+
+            <label asp-for="Block">Block: </label>
+            <input asp-for="Block" type="number"><br><br>
+
+            <label asp-for="Floor">Floor: </label>
+            <input asp-for="Floor" tyoe="number"><br><br>
+
+            <label asp-for="Suit">Suit: </label>
+            <input asp-for="Suit" type="number"><br><br>
+
+            <label asp-for="Capital">Capital: </label>
+            <input asp-for="Capital" type="number"><br><br>
+
+            <input type="submit" value="Create" class="submitCreateButton btn btn-primary" title="Crete">
+            <a asp-controller="Shop" asp-action="Shops" class="backButton btn btn-danger">Back</a>
+
+        </form>
+    </div>
+</div>

@@ -1,0 +1,105 @@
+@model CupcakeShop.Web.Models.Shop.ShopList
+
+@{
+    Layout = "_Layout";
+}
+
+
+<div class="container p-3">
+    <div class="pt-4">
+        <div class=" col-12 text-left">
+            <h2 class="page-title">My Sweet Cupcake</h2>
+        </div>
+    </div>
+    <br>
+    <div class="shop-table">
+        @if (Model.shopDto != null)
+        {
+            <div>
+                <samp>Address:</samp>
+                <td>Country: @Model.shopDto.Country, </td>
+                <td>City: @Model.shopDto.City, </td>
+                <td >Street: @Model.shopDto.Street, </td>
+                <td >Block: @Model.shopDto.Block, </td>
+                <td > Floor: @Model.shopDto.Floor, </td>
+                <td >Suit: @Model.shopDto.Suit</td><br>
+
+                <samp>Capital:</samp>
+                <td >Capital: @Model.shopDto.Capital$</td>
+
+                <td >
+                    <a class="shops-options" asp-action="Edit" asp-route-id="@Model.shopDto.Id" title="Edit">
+                        <i class="far fa-edit"></i>
+                    </a>
+                </td>
+            </div>
+            <div class="text-left employee-tabel">
+                <a asp-controller="Employee" asp-action="Create" asp-route-id="@Model.shopDto.Id" class="btn btn-primary plus-button" title="Add a new Employee">+</a>
+
+                @if (Model.employeesList.Any())
+                {
+                    <div>
+                        <table class="shop-table table-bordered table-striped">
+                            <thead>
+                            <tr>
+                                <th>
+                                    First Name
+                                </th>
+                                <th>
+                                    Last Name
+                                </th>
+                                <th>
+                                    Ocupation
+                                </th>
+                                <th>
+                                    Salary
+                                </th>
+                                <th>
+                                    Seniority
+                                </th>
+                                <th>
+                                    Hours per Day
+                                </th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach (var employee in Model.employeesList)
+                            {
+                                <tr>
+                                    <td>@employee.FirstName</td>
+                                    <td>@employee.LastName</td>
+                                    <td>@employee.Occupation</td>
+                                    <td>@employee.Salary</td>
+                                    <td>@employee.Seniority</td>
+                                    <td>@employee.HoursPerDay</td>
+                                    <td>
+                                        <div class="cupcakes-options">
+                                            <a asp-controller="Employee" asp-action="Delete" asp-route-id="@employee.Id" title="Delete">
+                                                <i class="fas fa-trash-alt"></i>
+                                            </a>
+                                            <a asp-controller="Shop" asp-action="Edit" asp-route-id="@employee.Id" title="Edit">
+                                                <i class="far fa-edit"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                            </tbody>
+                        </table>
+                    </div>
+                }
+                else
+                {
+                    <p> There are currently no Employees</p>
+                }
+            </div>
+            <br>
+        }
+        else
+        {
+            <a asp-controller="Shop" asp-action="Create" class="btn btn-primary plus-button" title="Create a Shop">+</a>
+            <p>There are currently no Shop</p>
+        }
+    </div>
+</div>

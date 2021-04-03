@@ -1,0 +1,27 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{3EAD6781-A2FF-47E5-847E-5A28AC0840B4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CupcakeShop.UnitTests", "CupcakeShop.UnitTests\CupcakeShop.UnitTests.csproj", "{5D904486-B23F-4BC7-861D-44E041CDB046}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CupcakeShop.Web", "CupcakeShop.Web\CupcakeShop.Web.csproj", "{3BFCAED6-48C4-42FC-BB03-1380BB6D523B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5D904486-B23F-4BC7-861D-44E041CDB046}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D904486-B23F-4BC7-861D-44E041CDB046}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D904486-B23F-4BC7-861D-44E041CDB046}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D904486-B23F-4BC7-861D-44E041CDB046}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3BFCAED6-48C4-42FC-BB03-1380BB6D523B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3BFCAED6-48C4-42FC-BB03-1380BB6D523B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3BFCAED6-48C4-42FC-BB03-1380BB6D523B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3BFCAED6-48C4-42FC-BB03-1380BB6D523B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5D904486-B23F-4BC7-861D-44E041CDB046} = {3EAD6781-A2FF-47E5-847E-5A28AC0840B4}
+	EndGlobalSection
+EndGlobal

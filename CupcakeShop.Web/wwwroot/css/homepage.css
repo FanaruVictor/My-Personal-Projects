@@ -1,0 +1,53 @@
+
+html {
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    margin:0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.homePage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 95%;
+    background-color: white;
+    color: red;
+    font-weight: bold;
+    text-align: center;
+    background-image: url(https://www.kveller.com/wp-content/uploads/2010/09/brooke-lark-203839-1200x800.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.title {
+    flex-direction: column;
+    display: flex;
+
+    font-family: "Sofia", sans-serif;
+    font-size: 250%;
+
+    text-shadow: 5px 5px 10px black;
+}
+
+/*.title:hover {
+    color: #fd3939;
+    cursor: pointer;
+    transition: translate 1s;
+    transform: translateY(100px);
+}*/

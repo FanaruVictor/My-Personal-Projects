@@ -1,0 +1,34 @@
+@model CupcakeShop.Web.Models.Employee.EmployeeEdit
+
+@{
+    Layout = "_Layout";
+}
+
+<div>
+    <h2 class="page-title">Edit an Employee</h2>
+    <form class="employee-form" method="post" asp-action="Edit">
+
+        <label asp-for="Salary">Salary:</label>
+        <input asp-for="Salary" type="number"><br>
+
+        <label asp-for="Occupation">Ocupation:</label>
+        <select class="selector" asp-for="Occupation" >
+            <option value="Manager">Manager</option>
+            <option value="Chef">Chef</option>
+            <option value="ChefAid">ChefAid</option>
+            <option value="Waiter">Waiter</option>
+            <option value="Bartender">Bartender</option>
+        </select><br>
+
+        <label asp-for="HoursPerDay">Hours per day:</label>
+        <input type="number" min="0" max="12" asp-for="HoursPerDay"><br>
+        <label asp-for="Seniority">Seniority:</label>
+        <input type="number" min="0" asp-for="Seniority"><br>
+        <label asp-for="ShopId">Shop: </label>
+        <input asp-for="ShopId" value="@ViewBag.ShopId" readonly><br>
+        <input type="submit" value="Update" class="submitCreateButton btn btn-info">
+        <a asp-controller="Employee" asp-action="Employees" asp-route-id="@ViewBag.ShopId" class="backButton btn btn-danger">Back</a>
+
+
+    </form>
+</div>

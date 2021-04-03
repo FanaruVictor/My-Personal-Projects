@@ -1,0 +1,69 @@
+.fa-trash-alt {
+    color: red;
+    font-size: 1.2rem;
+    margin: 0.2rem;
+}
+
+.fa-trash-alt:hover{
+    color: #fa4141;
+}
+.fa-cart-plus{
+    color: gray;
+    font-size: 1.2rem;
+    margin: 0.2rem;
+}
+.fa-cart-plus:hover{
+    color: #939292;
+}
+
+
+.cupcakes-table {
+    width: 100%;
+    margin-bottom: 2rem;
+}
+
+.fa-edit {
+    color: #00a6ff;
+    font-size: 1.2rem;
+    text-align: right;
+    margin: 0.2rem;
+
+}
+.fa-edit:hover{
+    color: #2fb3fa;
+}
+.fa-minus{
+    color: red;
+    font-size: 1.2rem;
+    margin: 0.2rem;
+}
+.fa-minus:hover{
+    color: #fa4141;
+}
+.fa-plus{
+    color: #00a6ff;
+    font-size: 1.2rem;
+    text-align: right;
+    margin: 0.2rem;
+}
+.fa-plus:hover{
+    color: #2fb3fa;
+}
+
+.cupcakes-options {
+    display: flex;
+    justify-content: space-around;
+}
+
+.shop-table{
+    width: 100%;
+    margin-top: 2rem;
+}
+.shops-options{
+
+    justify-content: space-around;
+}
+.cart-options{
+    display: flex;
+    justify-content: space-around;
+}

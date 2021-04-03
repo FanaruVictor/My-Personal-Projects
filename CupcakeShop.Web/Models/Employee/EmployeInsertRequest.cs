@@ -1,0 +1,23 @@
+namespace CupcakeShop.Web.Models.Employee
+{
+    public class EmployeInsertRequest
+    {
+        public enum Post
+        {
+            Manager,
+            Chef,
+            ChefAid,
+            Waiter,
+            Bartender
+        }
+
+
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public decimal Salary { get; set; }
+        public Entities.Employee.Post Occupation { get; set; }
+        public decimal HoursPerDay { get; set; }
+        public decimal Seniority { get; set; }
+        public int ShopId { get; set; }
+    }
+}

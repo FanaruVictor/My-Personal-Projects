@@ -1,0 +1,31 @@
+@model CupcakeShop.Web.Models.Shop.ShopEdit
+
+@{
+    Layout = "_Layout";
+}
+
+<form class="shop-form" method="post" asp-action="Edit">
+    <div>
+        <h2>Edit a Shop</h2>
+    </div>
+    <div>
+        <label asp-for="Name">Name:</label>
+        <input asp-for="Name" type="text"><br><br>
+        <label asp-for="Country">Country:</label>
+        <input asp-for="Country" type="text"><br><br>
+        <label asp-for="City">City:</label>
+        <input asp-for="City" type="text"><br><br>
+        <label asp-for="Street">Street:</label>
+        <input asp-for="Street" type="text"><br><br>
+        <label asp-for="Block">Block:</label>
+        <input asp-for="Block" type=number><br><br>
+        <label asp-for="Floor">Floor:</label>
+        <input asp-for="Floor" min="0" type=number><br><br>
+        <label asp-for="Suit">Suit:</label>
+        <input asp-for="Suit" min="0" type=number><br><br>
+        <label asp-for="Capital">Capital:</label>
+        <input asp-for="Capital" min="0" type=number><br><br>
+        <input type="submit" value="Update" class="submitCreateButton btn btn-primary">
+        <a asp-contoller="Shop" asp-action="Shops" class="backButton btn btn-danger">Back</a>
+    </div>
+</form>

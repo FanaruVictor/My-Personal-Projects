@@ -1,0 +1,40 @@
+@using Microsoft.EntityFrameworkCore.Storage
+@model CupcakeShop.Web.Models.Employee.EmployeInsertRequest
+
+@{
+    Layout = "_Layout";
+}
+<form class="employee-form" method="post" asp-action="Create">
+
+    <h2 class="page-title">Add an Employee</h2>
+    <div >
+        <label asp-for="FirstName">First Name: </label>
+        <input asp-for="FirstName" type="text"><br><br>
+
+        <label asp-for="LastName">Last Name: </label>
+        <input asp-for="LastName" type="text"><br><br>
+
+        <label asp-for="Salary">Salary:</label>
+        <input asp-for="Salary" type="number"><br><br>
+
+        <label asp-for="Occupation">Ocupation:</label>
+        <select class="selector" asp-for="Occupation">
+            <option value="Manager">Manager</option>
+            <option value="Chef">Chef</option>
+            <option value="ChefAid">ChefAid</option>
+            <option value="Waiter">Waiter</option>
+            <option value="Bartender">Bartender</option>
+        </select><br><br>
+
+        <label asp-for="HoursPerDay">Hours per day:</label>
+        <input type="number" min="0" max="12" asp-for="HoursPerDay"><br><br>
+        <label asp-for="Seniority">Seniority:</label>
+        <input type="number" min="0" asp-for="Seniority"><br><br>
+        <label asp-for="ShopId">Shop: </label>
+        <input asp-for="ShopId" value="@ViewBag.ShopId" readonly><br><br>
+        <input type="submit" value="Create" class="submitCreateButton btn btn-info">
+        <a asp-controller="Shop" asp-action="Shops"  class="backButton btn btn-danger">Back</a>
+
+
+    </div>
+</form>

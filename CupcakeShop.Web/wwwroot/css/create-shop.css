@@ -1,0 +1,12 @@
+
+.shop-form{
+    text-align: center;
+    margin: 2rem 0;
+}
+.shop-form input{
+    width: 13rem;
+}
+.shop-form label {
+    width: 8rem;
+    text-align: left;
+}

@@ -1,0 +1,54 @@
+@model CupcakeShop.Web.Models.Order.OrderInsertRequest
+
+@{
+    Layout = "_Layout";
+}
+
+<form  class="order-form" method="post" asp-action="ConfirmPersonalDetalies" asp-route-clientId="1">
+    <div>
+        <h2 class="page-title">Confirm Personal Detalies</h2>
+    </div>
+    <div>
+        <samp>Personal Data:</samp><br>
+        <label asp-for="ClientDto.FirstName">First name: </label>
+        <input asp-for="ClientDto.FirstName" type="text"><br><br>
+
+        <label asp-for="ClientDto.LastName">Last name: </label>
+        <input asp-for="ClientDto.LastName" type="text"><br><br>
+
+        <label asp-for="ClientDto.PhoneNumber">Phone number: </label>
+        <input asp-for="ClientDto.PhoneNumber" type="text"><br><br>
+
+        <label asp-for="ClientDto.Email">Email: </label>
+        <input asp-for="ClientDto.Email" type="text"><br><br>
+
+        <div class="radio-container">
+            <div class="radio-options">
+                <input asp-for="ClientDto.Type" value="Individual" type="radio">
+                <label asp-for="ClientDto.Type">Individual</label><br>
+
+                <input asp-for="ClientDto.Type" value="Company" type="radio">
+                <label asp-for="ClientDto.Type">Company</label><br>
+            </div>
+        </div>
+
+
+        <samp>Address:</samp><br>
+        <label asp-for="ClientDto.Street">Street: </label>
+        <input asp-for="ClientDto.Street" type="text"><br><br>
+
+        <label asp-for="ClientDto.Block">Block: </label>
+        <input asp-for="ClientDto.Block" min="1" type="number"><br><br>
+
+        <label asp-for="ClientDto.Floor">Floor: </label>
+        <input asp-for="ClientDto.Floor" min="0" type="number"><br><br>
+
+        <label asp-for="ClientDto.Suit">Suit: </label>
+        <input asp-for="ClientDto.Suit" min="1" type="number"><br><br>
+    </div>
+    <div>
+        <input type="submit" value="Confirm Personal Detalies" class="submit-order submitOrderButton btn btn-primary">
+        <a asp-controller="Cart" asp-action="Cart" class="backToCartButton btn btn-danger" >Back to Cart</a>
+    </div>
+
+</form>

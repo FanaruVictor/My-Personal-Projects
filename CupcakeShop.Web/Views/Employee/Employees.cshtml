@@ -1,0 +1,75 @@
+@model CupcakeShop.Web.Models.Employee.EmployeeList
+
+@{
+    Layout = "_Layout";
+}
+
+<div class="container p-3">
+    <div class="pt-4">
+        <div class=" col-12 text-left">
+            <h2 class="page-title text-left">Employees</h2>
+        </div>
+        <div class="text-left">
+            <a asp-controller="Employee" asp-action="Create" asp-route-id="@Model.ShopId" class="btn btn-primary plus-button" title="Add a new Employee">+</a>
+        </div>
+    </div>
+    <br/>
+    @if (Model.Employees.Any())
+            {
+                <table class="cupcakes-table table-bordered table-striped ">
+                    <thead>
+                    <tr>
+                        <tr>
+                            <th>
+                                First Name
+                            </th>
+                            <th>
+                                Last Name
+                            </th>
+                            <th>
+                                Occupation
+                            </th>
+                            <th>
+                                Salary
+                            </th>
+                            <th>
+                                Seniority
+                            </th>
+                            <th>
+                                Hours per Day
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var employee in Model.Employees)
+                    {
+                        <tr>
+                            <td>@employee.FirstName</td>
+                            <td >@employee.LastName</td>
+                            <td >@employee.Occupation</td>
+                            <td >@employee.Salary</td>
+                            <td >@employee.Seniority</td>
+                            <td>@employee.HoursPerDay</td>
+                            <td >
+                                <div class="cupcakes-options">
+                                    <a asp-action="Delete" asp-route-id="@employee.Id" title="Delete">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </a>
+                                    <a asp-action="Edit" asp-route-id="@employee.Id" title="Edit">
+                                        <i class="far fa-edit"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <p>There are currently no Employees</p>
+            }
+
+
+</div>

@@ -1,0 +1,109 @@
+@using CupcakeShop.Web.Models.Cart
+@model CupcakeShop.Web.Models.Cart.CartList
+
+@{
+    Layout = "_Layout";
+}
+<div class="container p-3">
+    <div class="pt-4">
+        <div class=" col-12 text-left">
+            <h2 class="page-item-title text-left">Cart</h2>
+        </div>
+        <div class="text-left">
+            <a asp-controller="Cupcake" asp-action="Cupcakes" class="btn btn-primary plus-button" title="Add a new Cupcake to your Cart">+</a>
+        </div>
+
+    </div>
+    <br/>
+    @if (Model.CupcakeDtos.Any())
+    {
+        <table class="cupcakes-table table-bordered table-striped ">
+            <thead>
+            <tr>
+                <th>
+                    Cupcake Name
+                </th>
+                <th>
+                    Flavour
+                </th>
+                <th>
+                    Price
+                </th>
+                <th>
+                    Weight
+                </th>
+                <th>
+                    Producer
+                </th>
+                <th>
+                    Expiration
+                </th>
+                <th>
+                    Icing
+                </th>
+                <th>
+                    Dough
+                </th>
+                <th>
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var cupcake in Model.CupcakeDtos)
+            {
+                <tr>
+                    <td >@cupcake.Name</td>
+                    <td >@cupcake.Flavour</td>
+                    <td >@cupcake.Price</td>
+                    <td >@cupcake.Weight</td>
+                    <td >@cupcake.Producer</td>
+                    <td >@cupcake.Expiration</td>
+                    <td >@cupcake.Icing</td>
+                    <td >@cupcake.Dough</td>
+
+                    <td >
+                        <div class="cart-options">
+                            <div class="add-options">
+                                <form asp-controller="Cart" asp-action="Remove" method="post" asp-route-id="@cupcake.Id" asp-route-clientId="1">
+                                    <a onclick="this.parentElement.submit()">
+                                        <i class="fas fa-minus" title="Add one More"></i>
+                                    </a>
+                                </form>
+
+                                <input class="quantity text-center" asp-for="@cupcake.Quantity" type="text" value="@cupcake.Quantity" readonly>
+                                @if (cupcake.Stock >= 1)
+                                {
+                                    <form asp-controller="Cart" asp-action="Add" method="post" asp-route-id="@cupcake.Id" asp-route-clientId="1">
+                                        <a onclick="this.parentElement.submit()">
+                                            <i class="fas fa-plus" title="Add one More"></i>
+                                        </a>
+                                    </form>
+                                }
+
+                            </div>
+
+                            <div >
+                                <a asp-action="Delete" asp-route-id="@Model.CartDto.Id" asp-route-cupcakeId="@cupcake.Id" title="Delete">
+                                    <i class="fas fa-trash-alt"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+        <div class="submit-order">
+
+
+            <a asp-controller="Order" asp-action="ConfirmPersonalDetalies" asp-route-clientId="1" class="submitCreateButton btn btn-primary">Order</a>
+        </div>
+    }
+    else
+    {
+        <p>There are currently no Cupcakes in Cart</p>
+    }
+
+
+</div>
