@@ -6,7 +6,6 @@ using System.Security.Cryptography;
 using CupcakeShop.Web.Data;
 using CupcakeShop.Web.Entities;
 using CupcakeShop.Web.Models;
-using CupcakeShop.Web.Models.AddToCart;
 using CupcakeShop.Web.Models.Cupcakes;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using CupcakeShop.Web.Entities;
 
-namespace CupcakeShop.Web.Models.AddToCart
+namespace CupcakeShop.Web.Models.Cart
 {
     public class CartInsertRequest
     {

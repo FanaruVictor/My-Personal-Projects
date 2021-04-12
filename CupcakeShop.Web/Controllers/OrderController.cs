@@ -47,8 +47,8 @@ namespace CupcakeShop.Web.Controllers
             entity.UpdateContact(request.ClientDto.FirstName, request.ClientDto.LastName, request.ClientDto.PhoneNumber,
                 request.ClientDto.Email);
             entity.UpdateType(request.ClientDto.Type);
-                _context.SaveChanges();
-            return RedirectToAction("ConfirmOrder",new{clientId=clientId});
+            _context.SaveChanges();
+            return RedirectToAction("ConfirmOrder", new {clientId = clientId});
         }
 
         //Get-ConfirmOrder
@@ -66,8 +66,9 @@ namespace CupcakeShop.Web.Controllers
                 Floor = client.Floor,
                 Suit = client.Suit
             };
-            List<CupcakeDto> cupcakeDtos = new List<CupcakeDto>();
-            var cart = _context.Carts.Include(x => x.CupcakeCarts).ThenInclude(x => x.Cupcake).FirstOrDefault(x => x.ClientId == clientId);
+            List<CupcakeQuantityDto> cupcakeQuantityDto = new List<CupcakeQuantityDto>();
+            var cart = _context.Carts.Include(x => x.CupcakeCarts).ThenInclude(x => x.Cupcake)
+                .FirstOrDefault(x => x.ClientId == clientId);
             if (cart == null)
             {
                 return NotFound();
@@ -75,7 +76,7 @@ namespace CupcakeShop.Web.Controllers
 
             foreach (var cupcakeCart in cart.CupcakeCarts)
             {
-                CupcakeDto curentCupcakeDto = new()
+                CupcakeQuantityDto curentCupcakeDto = new()
                 {
                     Name = cupcakeCart.Cupcake.Name,
                     Weight = cupcakeCart.Cupcake.Weight,
@@ -84,38 +85,149 @@ namespace CupcakeShop.Web.Controllers
                     Dough = cupcakeCart.Cupcake.Dough,
                     Expiration = cupcakeCart.Cupcake.Expiration,
                     Flavour = cupcakeCart.Cupcake.Flavour,
-                    Icing = cupcakeCart.Cupcake.Icing
+                    Icing = cupcakeCart.Cupcake.Icing,
+                    Quantity = cupcakeCart.Quantity
                 };
-                cupcakeDtos.Add(curentCupcakeDto);
+                cupcakeQuantityDto.Add(curentCupcakeDto);
             }
 
-            OrderDto orderDto = new OrderDto()
-            {
-                Emergency = false,
-                ClientId = clientId,
-                DateOrder = DateTime.Now,
-                 DateDelivery = DateTime.Now.AddDays(3),
-                StatusOrder = Order.StatusType.OnHold
-            };
+
             ConfirmOrderList confirmOrderList = new()
             {
                 ClientDto = clientDto,
-                CupcakeDtos = cupcakeDtos,
-                OrderDto = orderDto
+                CupcakeQuantityDto = cupcakeQuantityDto
             };
             return View(confirmOrderList);
         }
+
         //Post-ConfirmOrder
         [HttpPost]
-        public IActionResult ConfirmOrder(int id,ConfirmOrderList confirmOrderList)
+        public IActionResult ConfirmOrder(int clientId, ConfirmOrderList confirmOrderList)
         {
-            return Ok();
+            Order order = new Order(DateTime.Now, DateTime.Now.AddDays(3), clientId, Order.StatusType.Comfirmed, false, 1);
+            _context.Orders.Add(order);
+            _context.SaveChanges();
+
+            foreach (var cupcakeDto in confirmOrderList.CupcakeQuantityDto)
+            {
+                Cupcake cupcake = _context.Cupcakes.First(x => x.Id == cupcakeDto.Id);
+                CupcakeOrder cupcakeOrder = new CupcakeOrder(cupcake.Id, order.Id,
+                    cupcake.CupcakeCarts.First(x => x.CupcakeId == cupcake.Id).Quantity);
+                _context.CupcakeOrders.Add(cupcakeOrder);
+            }
+
+            _context.SaveChanges();
+            return RedirectToAction("OrderConfirmed", new {clientId=1,confirmOrderList});
         }
 
+        
+
         //get-edit
-        public IActionResult EditOrder()
+        public IActionResult EditOrder(int clientId)
         {
-            return Ok();
+            Client client = _context.Clients.First(x => x.Id == clientId);
+            ClientDto clientDto = new()
+            {
+                FirstName = client.FirstName,
+                LastName = client.LastName,
+                PhoneNumber = client.PhoneNumber,
+                Email = client.Email,
+                Street = client.Street,
+                Block = client.Block,
+                Floor = client.Floor,
+                Suit = client.Suit
+            };
+            List<CupcakeQuantityDto> cupcakeQuantityDto = new List<CupcakeQuantityDto>();
+            var cart = _context.Carts.Include(x => x.CupcakeCarts).ThenInclude(x => x.Cupcake)
+                .FirstOrDefault(x => x.ClientId == clientId);
+            if (cart == null)
+            {
+                return NotFound();
+            }
+
+            foreach (var cupcakeCart in cart.CupcakeCarts)
+            {
+                CupcakeQuantityDto curentCupcakeDto = new()
+                {
+                    Id=cupcakeCart.Cupcake.Id,
+                    Name = cupcakeCart.Cupcake.Name,
+                    Weight = cupcakeCart.Cupcake.Weight,
+                    Price = cupcakeCart.Cupcake.Price,
+                    Producer = cupcakeCart.Cupcake.Producer,
+                    Dough = cupcakeCart.Cupcake.Dough,
+                    Expiration = cupcakeCart.Cupcake.Expiration,
+                    Flavour = cupcakeCart.Cupcake.Flavour,
+                    Icing = cupcakeCart.Cupcake.Icing,
+                    Stock = cupcakeCart.Cupcake.Stock,
+                    Quantity = cupcakeCart.Quantity
+
+                };
+                cupcakeQuantityDto.Add(curentCupcakeDto);
+            }
+
+
+            ConfirmOrderList confirmOrderList = new()
+            {
+                ClientDto = clientDto,
+                CupcakeQuantityDto = cupcakeQuantityDto,
+            };
+            return View(confirmOrderList);
+
+            return View();
         }
+
+        [HttpPost]
+        public IActionResult EditOrder(int clientId, ConfirmOrderList confirmOrderList)
+        {
+            var entity = _context.Clients.First(x => x.Id == clientId);
+            entity.UpdateContact(confirmOrderList.ClientDto.FirstName, confirmOrderList.ClientDto.LastName,
+                confirmOrderList.ClientDto.PhoneNumber, confirmOrderList.ClientDto.Email);
+            entity.UpdateType(confirmOrderList.ClientDto.Type);
+            entity.UpdateAddress(confirmOrderList.ClientDto.Street, confirmOrderList.ClientDto.Block,
+                confirmOrderList.ClientDto.Floor, confirmOrderList.ClientDto.Suit);
+            _context.SaveChanges();
+            return RedirectToAction("ConfirmOrder",new {clientId=1,confirmOrderList});
+        }
+        [HttpPost]
+        public IActionResult Add(int id, int clientId)
+        {
+            var entity = _context.Carts.Include(x => x.CupcakeCarts)
+                .ThenInclude(x => x.Cupcake)
+                .First(x => x.ClientId == clientId);
+            
+            entity.AddCupcake(id);
+            _context.Update(entity);
+            
+            var cupcake = _context.Cupcakes.First(x => x.Id == id);
+            cupcake.DecreaseStock();
+            _context.SaveChanges();
+            return RedirectToAction("EditOrder");
+        }
+
+        public IActionResult Remove(int id, int clientId)
+        {
+            var entity = _context.Carts.Include(x => x.CupcakeCarts).ThenInclude(x => x.Cupcake)
+                .FirstOrDefault(x => x.ClientId == clientId);
+           
+
+            entity.RemoveCucpake(id);
+            CupcakeCart cupcakeCart = entity.CupcakeCarts.First(x => x.CupcakeId == id);
+            if (cupcakeCart.Quantity == 0)
+            {
+                Delete( id);
+            }
+
+            _context.SaveChanges();
+            return RedirectToAction("EditOrder");        }
+        [HttpGet]
+        public IActionResult Delete( int cupcakeId)
+        {
+            
+            CupcakeCart cupcakeCart = _context.CupcakeCarts.Include(x => x.Cupcake).
+                First(x => x.CupcakeId == cupcakeId);
+            cupcakeCart.Cupcake.RestoreStock(cupcakeCart.Quantity);
+            _context.CupcakeCarts.Remove(cupcakeCart);
+            _context.SaveChanges();
+            return RedirectToAction("EditOrder");        }
     }
 }

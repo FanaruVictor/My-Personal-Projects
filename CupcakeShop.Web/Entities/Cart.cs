@@ -38,7 +38,5 @@ namespace CupcakeShop.Web.Entities
                 cupcakeCart.Cupcake.IncreaseStock();
             }
         }
-
-
     }
 }

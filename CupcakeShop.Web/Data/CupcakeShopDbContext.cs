@@ -18,8 +18,6 @@ namespace CupcakeShop.Web.Data
             modelBuilder.Entity<CupcakeOrder>().HasKey(sc => new {sc.CupcakeId, sc.OrderId});
             modelBuilder.Entity<CupcakeCandy>().HasKey(sc => new {sc.CupcakeId, sc.CandyId});
             modelBuilder.Entity<CupcakeCart>().HasKey(sc => new {sc.CupcakeId, sc.CartId});
-
-
         }
 
 
@@ -30,7 +28,7 @@ namespace CupcakeShop.Web.Data
         public DbSet<Candy> Candies { get; set; }
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Cart> Carts { get; set; }
-        public DbSet<CupcakeOrder> OrderCupcakes { get; set; }
+        public DbSet<CupcakeOrder> CupcakeOrders { get; set; }
         public DbSet<CupcakeCandy> CupcakeCandies { get; set; }
         public DbSet<CupcakeCart> CupcakeCarts { get; set; }
     }

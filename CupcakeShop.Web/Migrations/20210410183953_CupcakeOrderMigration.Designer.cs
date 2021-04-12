@@ -4,14 +4,16 @@ using CupcakeShop.Web.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CupcakeShop.Web.Migrations
 {
     [DbContext(typeof(CupcakeShopDbContext))]
-    partial class CupcakeShopDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210410183953_CupcakeOrderMigration")]
+    partial class CupcakeOrderMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -201,7 +203,7 @@ namespace CupcakeShop.Web.Migrations
 
                     b.HasIndex("OrderId");
 
-                    b.ToTable("CupcakeOrders");
+                    b.ToTable("CupcakesOrder");
                 });
 
             modelBuilder.Entity("CupcakeShop.Web.Entities.Employee", b =>

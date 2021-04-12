@@ -1,10 +1,10 @@
-@model CupcakeShop.Web.Models.Order.ConfirmOrderList
+﻿@model CupcakeShop.Web.Models.Order.ConfirmOrderList
 
 @{
     Layout = "_Layout";
 }
 
-<form class="confirm-order" method="post" asp-action="ConfirmOrder" asp-route-clientId="1" >
+<form class="confirm-order" method="post" asp-action="EditOrder" asp-route-clientId="1">
     <div>
         <h2 class="page-title">Confirm Order</h2>
     </div>
@@ -12,16 +12,16 @@
     <div class=" confirmOrder-form">
         <samp>Persona Data:</samp><br>
         <label asp-for="@Model.ClientDto.FirstName">First Name: </label>
-        <input asp-for="@Model.ClientDto.FirstName" type="text" readonly><br><br>
-        
+        <input asp-for="@Model.ClientDto.FirstName" type="text"><br><br>
+
         <label asp-for="@Model.ClientDto.LastName">Last Name: </label>
-        <input asp-for="@Model.ClientDto.LastName" type="text" readonly><br><br>
+        <input asp-for="@Model.ClientDto.LastName" type="text"><br><br>
 
         <label asp-for="@Model.ClientDto.PhoneNumber">Phone Number: </label>
-        <input asp-for="@Model.ClientDto.PhoneNumber" type="text" readonly><br><br>
+        <input asp-for="@Model.ClientDto.PhoneNumber" type="text"><br><br>
 
         <label asp-for="@Model.ClientDto.Email">Email: </label>
-        <input asp-for="@Model.ClientDto.Email" type="text" readonly><br><br>
+        <input asp-for="@Model.ClientDto.Email" type="text"><br><br>
 
         <div class="radio-container">
             <div class="radio-options">
@@ -35,23 +35,22 @@
 
         <samp>Address:</samp><br>
         <label asp-for="@Model.ClientDto.Street">Street: </label>
-        <input asp-for="@Model.ClientDto.Street" type="text" readonly><br><br>
+        <input asp-for="@Model.ClientDto.Street" type="text"><br><br>
 
         <label asp-for="@Model.ClientDto.Block">Block: </label>
-        <input asp-for="@Model.ClientDto.Block" type="number" readonly><br><br>
+        <input asp-for="@Model.ClientDto.Block" type="number"><br><br>
 
         <label asp-for="@Model.ClientDto.Floor">Floor: </label>
-        <input asp-for="@Model.ClientDto.Floor" type="number" readonly><br><br>
-        
+        <input asp-for="@Model.ClientDto.Floor" type="number"><br><br>
+
         <label asp-for="@Model.ClientDto.Suit">Suit: </label>
-        <input asp-for="@Model.ClientDto.Suit" type="number" readonly><br><br>
-        
+        <input asp-for="@Model.ClientDto.Suit" type="number"><br><br>
+
     </div><br>
 
     <div>
         @if (Model.CupcakeQuantityDto.Any())
         {
-            <input asp-for="@Model.CupcakeQuantityDto" value="@Model.CupcakeQuantityDto" hidden>
             <samp>Cupcakes:</samp>
             <br>
             <table class="cupcakes-table table-bordered table-striped ">
@@ -81,7 +80,9 @@
                     <th>
                         Dough
                     </th>
-                    <th></th>
+                    <th>
+
+                    </th>
                 </tr>
                 </thead>
                 <tbody>
@@ -96,16 +97,43 @@
                         <td >@cupcake.Expiration</td>
                         <td >@cupcake.Icing</td>
                         <td >@cupcake.Dough</td>
-                        <td >@cupcake.Quantity</td>
+                        <td >
+                            <div class="cart-options">
+                                <div class="add-options">
+                                    <form asp-controller="Order" asp-action="Remove" method="post" asp-route-id="@cupcake.Id" asp-route-clientId="1">
+                                        <a onclick="this.parentElement.submit()">
+                                            <i class="fas fa-minus" title="Add one More"></i>
+                                        </a>
+                                    </form>
+
+                                    <input class="quantity text-center" asp-for="@cupcake.Quantity" type="text" value="@cupcake.Quantity" readonly>
+                                    @if (cupcake.Stock >= 1)
+                                    {
+                                        <form asp-controller="Order" asp-action="Add" method="post" asp-route-id="@cupcake.Id" asp-route-clientId="1">
+                                            <a onclick="this.parentElement.submit()">
+                                                <i class="fas fa-plus" title="Add one More"></i>
+                                            </a>
+                                        </form>
+                                    }
+
+                                </div>
+
+                                <div >
+                                    <a asp-action="Delete"  asp-route-cupcakeId="@cupcake.Id" title="Delete">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </a>
+                                </div>
+                            </div>
+
+                        </td>
                     </tr>
                 }
                 </tbody>
             </table>
         }
         <div>
-            <input type="submit" class="submitOrderButton btn btn-primary" value="Confirm Order">
-            <a asp-controller="Order" asp-action="EditOrder" asp-route-clientId="1" class="submitOrderButton btn btn-info">Edit Order</a>
-            <a asp-controller="Cart" asp-action="Cart" asp-route-clientId="1" class="backToCartButton btn btn-danger">Back to Cart</a>
+            <input type="submit" class="submitOrderButton btn btn-primary" value="Confirm Changes">
+            <a asp-controller="Order" asp-action="ConfirmOrder" asp-route-clientId="1" class="backToCartButton btn btn-danger">Back</a>
         </div>
     </div>
 </form>
