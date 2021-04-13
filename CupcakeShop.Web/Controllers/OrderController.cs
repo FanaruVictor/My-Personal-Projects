@@ -117,7 +117,7 @@ namespace CupcakeShop.Web.Controllers
             }
 
             _context.SaveChanges();
-            return RedirectToAction("OrderConfirmed", new {clientId=1,confirmOrderList});
+            return RedirectToAction("Index","Home");
         }
 
         
@@ -172,8 +172,7 @@ namespace CupcakeShop.Web.Controllers
                 CupcakeQuantityDto = cupcakeQuantityDto,
             };
             return View(confirmOrderList);
-
-            return View();
+            
         }
 
         [HttpPost]
@@ -187,8 +186,9 @@ namespace CupcakeShop.Web.Controllers
                 confirmOrderList.ClientDto.Floor, confirmOrderList.ClientDto.Suit);
             _context.SaveChanges();
             return RedirectToAction("ConfirmOrder",new {clientId=1,confirmOrderList});
+           
         }
-        [HttpPost]
+        [HttpGet]
         public IActionResult Add(int id, int clientId)
         {
             var entity = _context.Carts.Include(x => x.CupcakeCarts)
@@ -201,24 +201,31 @@ namespace CupcakeShop.Web.Controllers
             var cupcake = _context.Cupcakes.First(x => x.Id == id);
             cupcake.DecreaseStock();
             _context.SaveChanges();
-            return RedirectToAction("EditOrder");
-        }
+            return RedirectToAction("EditOrder", new{clientId=1});
 
+            
+        }
+        [HttpGet]
         public IActionResult Remove(int id, int clientId)
         {
             var entity = _context.Carts.Include(x => x.CupcakeCarts).ThenInclude(x => x.Cupcake)
                 .FirstOrDefault(x => x.ClientId == clientId);
-           
+            if (entity == null)
+            {
+                throw new Exception("The cart did not exist");
+            }
 
             entity.RemoveCucpake(id);
             CupcakeCart cupcakeCart = entity.CupcakeCarts.First(x => x.CupcakeId == id);
             if (cupcakeCart.Quantity == 0)
             {
-                Delete( id);
+                Delete(id);
             }
 
             _context.SaveChanges();
-            return RedirectToAction("EditOrder");        }
+            return RedirectToAction("EditOrder", new{clientId=1});
+        }
+        
         [HttpGet]
         public IActionResult Delete( int cupcakeId)
         {
@@ -228,6 +235,7 @@ namespace CupcakeShop.Web.Controllers
             cupcakeCart.Cupcake.RestoreStock(cupcakeCart.Quantity);
             _context.CupcakeCarts.Remove(cupcakeCart);
             _context.SaveChanges();
-            return RedirectToAction("EditOrder");        }
+            return RedirectToAction("EditOrder", new{clientId=1});
+        }
     }
 }

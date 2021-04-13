@@ -46,7 +46,7 @@
         <label asp-for="ClientDto.Suit">Suit: </label>
         <input asp-for="ClientDto.Suit" min="1" type="number"><br><br>
     </div>
-    <div>
+    <div class="confirmEdit"confirmButtons>
         <input type="submit" value="Confirm Personal Detalies" class="submit-order submitOrderButton btn btn-primary">
         <a asp-controller="Cart" asp-action="Cart" class="backToCartButton btn btn-danger" >Back to Cart</a>
     </div>

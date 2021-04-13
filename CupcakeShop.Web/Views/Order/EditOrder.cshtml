@@ -1,12 +1,20 @@
 ﻿@model CupcakeShop.Web.Models.Order.ConfirmOrderList
 
+
 @{
     Layout = "_Layout";
+    /*AjaxOptions ajaxOptions = new AjaxOptions
+    {
+        HttpMethod = "POST",
+        InsertionMode = InsertionMode.Replace,
+        UpdateTargetId = "cupcakeQuantity"
+    };*/
 }
+
 
 <form class="confirm-order" method="post" asp-action="EditOrder" asp-route-clientId="1">
     <div>
-        <h2 class="page-title">Confirm Order</h2>
+        <h2 class="page-title">Edit Order</h2>
     </div>
 
     <div class=" confirmOrder-form">
@@ -100,26 +108,27 @@
                         <td >
                             <div class="cart-options">
                                 <div class="add-options">
-                                    <form asp-controller="Order" asp-action="Remove" method="post" asp-route-id="@cupcake.Id" asp-route-clientId="1">
-                                        <a onclick="this.parentElement.submit()">
-                                            <i class="fas fa-minus" title="Add one More"></i>
+                                    <div >
+                                        <a asp-action="Remove" asp-route-id="@cupcake.Id" asp-route-clientId="1" title="Remove one">
+                                            <i class="fas fa-minus"></i>
                                         </a>
-                                    </form>
-
+                                    </div>
+                                
+                                    
                                     <input class="quantity text-center" asp-for="@cupcake.Quantity" type="text" value="@cupcake.Quantity" readonly>
+                                    
+
                                     @if (cupcake.Stock >= 1)
                                     {
-                                        <form asp-controller="Order" asp-action="Add" method="post" asp-route-id="@cupcake.Id" asp-route-clientId="1">
-                                            <a onclick="this.parentElement.submit()">
-                                                <i class="fas fa-plus" title="Add one More"></i>
-                                            </a>
-                                        </form>
+                                        <a asp-action="Add" asp-route-id="@cupcake.Id" asp-route-clientId="1" title="Add one">
+                                            <i class="fas fa-plus"></i>
+                                        </a>
                                     }
 
                                 </div>
 
                                 <div >
-                                    <a asp-action="Delete"  asp-route-cupcakeId="@cupcake.Id" title="Delete">
+                                    <a asp-action="Delete" asp-route-cupcakeId="@cupcake.Id" title="Delete">
                                         <i class="fas fa-trash-alt"></i>
                                     </a>
                                 </div>
@@ -131,7 +140,7 @@
                 </tbody>
             </table>
         }
-        <div>
+        <div class="confirmButtons">
             <input type="submit" class="submitOrderButton btn btn-primary" value="Confirm Changes">
             <a asp-controller="Order" asp-action="ConfirmOrder" asp-route-clientId="1" class="backToCartButton btn btn-danger">Back</a>
         </div>

@@ -95,7 +95,7 @@ namespace CupcakeShop.Web.Controllers
             var entity = _context.Carts.Include(x => x.CupcakeCarts)
                 .ThenInclude(x => x.Cupcake)
                 .FirstOrDefault(x => x.ClientId == clientId);
-            //?
+            
             if (entity == null)
             {
                 entity = new(clientId);
@@ -112,6 +112,7 @@ namespace CupcakeShop.Web.Controllers
             return RedirectToAction("Cart");
         }
 
+        [HttpPost]
         public IActionResult Remove(int id, int clientId)
         {
             var entity = _context.Carts.Include(x => x.CupcakeCarts).ThenInclude(x => x.Cupcake)

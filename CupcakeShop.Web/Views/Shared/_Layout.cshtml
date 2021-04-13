@@ -13,45 +13,56 @@
     <link rel="stylesheet" href="~/css/create-shop.css">
     <link rel="stylesheet" href="~/css/create-cart.css">
     <link rel="stylesheet" href="~/css/create-order.css">
+    <link rel="stylesheet" href="~/css/navbar.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
-    
+    @*
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery.unobtrusive-ajax.min.js" integrity="sha512-DedNBWPF0hLGUPNbCYfj8qjlEnNE92Fqn7xd3Sscfu7ipy7Zu33unHdugqRD3c4Vj7/yLv+slqZhMls/4Oc7Zg==" crossorigin="anonymous"></script>
+   *@
+    @*
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajax-unobtrusive/3.2.6/jquery.unobtrusive-ajax.js" integrity="sha512-f04GBpoqEZhbyjlRTuXeg8FIHDb+xfCJ0LVdqiN1fEl5B3jz3Z0SPe9IxDumOVdTeeXmKMcMJhb26VuGf1Laqw==" crossorigin="anonymous"></script>
+   *@
+
 </head>
 <body>
 <header>
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow">
-        <div class="container">
-            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">My Sweet Cupcake</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+    <nav class=" navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow">
+        <ul class="navbar-config navbar-nav flex-grow-1">
+            <div class=" nav-logo_pages container">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">My Sweet Cupcake</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-                <ul class="navbar-nav flex-grow-1">
+                <div class="options">
+                    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
 
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-controller="Home" asp-action="Index"></a>
-                    </li>
-                    @*<li class="nav-item">
-                        <a class="nav-link text-dark" asp-controller="Order" asp-action="Orders">Orders</a>
-                    </li>*@
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-controller="Cupcake" asp-action="Cupcakes">Cupcakes</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-controller="Cupcake" asp-action="Create">Create Your Cupcake</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-controller="Shop" asp-action="Shops">Shops</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-controller="Cart" asp-action="Cart">
-                            <i class="fas fa-cart-plus"></i>
-                        </a>
-                    </li>
-                </ul>
+
+
+                        @*<li class="nav-item">
+                                        <a class="nav-link text-dark" asp-controller="Order" asp-action="Orders">Orders</a>
+                        </li>*@
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="Cupcake" asp-action="Cupcakes">Cupcakes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="Cupcake" asp-action="Create">Create Your Cupcake</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="Shop" asp-action="Shops">Shops</a>
+                        </li>
+
+                    </div>
+                </div>
+
+
             </div>
-        </div>
+            <li class="nav-cart nav-item">
+                <a class="nav-link text-dark" asp-controller="Cart" asp-action="Cart" title="Cart">
+                    <i class="fas fa-cart-plus"></i>
+                </a>
+            </li>
+        </ul>
     </nav>
 </header>
 
